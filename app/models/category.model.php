@@ -13,12 +13,18 @@ class CategoryModel{
         $this->db = $this->connect();
     }
 
-    function getAll($order = 'ASC'){
-        $query = 'SELECT * from categories';
-        
-        if($order == 'DESC' || $order == 'ASC'){
-            $query = $query . ' ORDER BY name ' . $order;
-        }
+    function getFields(){
+        $query = 'SHOW columns FROM categories';
+
+        $preparedQuery = $this->db->prepare($query);
+        $preparedQuery->execute();
+
+        $fields = $preparedQuery->fetchAll(PDO::FETCH_COLUMN);
+        return $fields;
+    }
+
+    function getAll($sortBy, $order, $limit, $offset){
+        $query = 'SELECT * from categories ORDER BY ' . $sortBy . ' ' . $order . ' LIMIT ' . $offset .',' .$limit;
 
         $preparedQuery = $this->db->prepare($query);
         $preparedQuery->execute();
