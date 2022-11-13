@@ -41,6 +41,16 @@ class CategoryModel{
 
         return $category;
     }
+
+    function getByFieldValue($filterBy, $value){
+        $query = 'SELECT * from categories WHERE ' . $filterBy . ' LIKE \'%' . $value . '%\'';
+
+        $preparedQuery = $this->db->prepare($query);
+        $preparedQuery->execute();
+
+        $categories = $preparedQuery->fetchAll(PDO::FETCH_OBJ);
+        return $categories;
+    }
     
     function insert($name,$description){
         $query = $this->db->prepare('INSERT INTO categories (name,description) VALUES(?,?)');

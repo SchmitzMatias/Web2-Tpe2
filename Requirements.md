@@ -9,3 +9,11 @@
 
 # Requerimientos NO funcionales obligatorios
 Se debe adjuntar documentación de los endpoints generados en el README.md del repositorio. Es decir, una descripción de cada endpoint, como se usan y ejemplos. Entender que esta documentación la va a leer otro desarrollador para entender como se consume la API.
+
+
+# Requerimientos funcionales optativos
+
+7. El servicio que obtiene una colección entera debe poder paginarse.
+8. El servicio que obtiene una colección entera debe poder filtrarse por alguno de sus campos.
+9. El servicio que obtiene una colección entera debe poder ordenarse por cualquiera de los campos de la tabla de manera ascendente o descendente.
+10. El servicio debe requerir un token para realizar modificaciones(PUT, POST)

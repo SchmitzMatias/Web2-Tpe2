@@ -24,6 +24,7 @@ class CategoryApiController {
         $limit = 10;
         $page=1;
         $offset = 0;
+        $filterBy = null;
 
         if(isset($_GET['sortBy']) && !empty($_GET['sortBy'])){
             $input = strtolower($_GET['sortBy']);
@@ -50,7 +51,7 @@ class CategoryApiController {
             if(is_numeric($input) && $input>0){
                 $limit = $input;
             }else{
-                $this->view->response($input . ": No es un limite valido",400);
+                $this->view->response($input . ": No es un limite valido", 400);
                 die();
             }
         }
@@ -61,7 +62,21 @@ class CategoryApiController {
                 $page = $input;
                 $offset = ($page - 1) * $limit;
             }else{
-                $this->view->response($input . ": No es una pagina valida",400);
+                $this->view->response($input . ": No es una pagina valida", 400);
+                die();
+            }
+        }
+
+        if (isset($_GET['filterBy']) && !empty($_GET['filterBy']) && isset($_GET['value']) && !empty($_GET['value'])){
+            $filterBy = strtolower($_GET['filterBy']);
+            $value = strtolower($_GET['value']);
+
+            if (in_array($filterBy,$this->model->getFields())){
+                $categories = $this->model->getByFieldValue($filterBy, $value);
+                $this->view->response($categories,200);
+                die();
+            }else{
+                $this->view->response($filterBy . ": No es un campo valido", 400);
                 die();
             }
         }
