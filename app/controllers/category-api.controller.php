@@ -2,16 +2,20 @@
 
 require_once './app/models/category.model.php';
 require_once './app/views/api.view.php';
+require_once './app/helpers/auth-api.helper.php';
 
 class CategoryApiController {
     private $model;
     private $view;
+    private $authHelper;
     private $data;
-
+    
     public function __construct(){
         $this->model = new CategoryModel();
         $this->view = new ApiView();
+        $this->authHelper = new AuthApiHelper();
         $this->data = file_get_contents("php://input");
+        
     }
 
     private function getData() {
@@ -98,6 +102,12 @@ class CategoryApiController {
     }
 
     public function addCategory(){
+        
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
+
         $category = $this->getData();
 
         if (empty($category->name) || empty($category->description)) {
@@ -111,6 +121,12 @@ class CategoryApiController {
     }
 
     public function updateCategory($params = null){
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
+
         $id = $params[':id'];
 
         $categoryValues = $this->getData();
@@ -129,6 +145,12 @@ class CategoryApiController {
     }
 
     public function deleteCategory($params = null){
+
+        if(!$this->authHelper->isLoggedIn()){
+            $this->view->response("No estas logeado", 401);
+            return;
+        }
+
         $id = $params[':id'];
 
         $category = $this->model->get($id);
