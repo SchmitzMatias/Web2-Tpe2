@@ -1,6 +1,7 @@
 <?php
 require_once './app/views/api.view.php';
 require_once './app/helpers/auth-api.helper.php';
+require_once './app/models/user.model.php';
 
 function base64url_encode($data) {
     return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
@@ -10,10 +11,12 @@ function base64url_encode($data) {
 class AuthApiController{
     private $view;
     private $authHelper;
-    
+    private $userModel;
+
     public function __construct() {
         $this->view = new ApiView();
         $this->authHelper = new AuthApiHelper();
+        $this->userModel = new UserModel();
     }
 
     public function getToken() {
@@ -24,7 +27,7 @@ class AuthApiController{
             return;
         }
         $basic = explode(" ",$basic);
-        $this->view->response($basic);
+        
         if($basic[0]!="Basic"){
             $this->view->response('La autenticación debe ser Basic', 401);
             return;
@@ -34,15 +37,18 @@ class AuthApiController{
         $userpass = explode(":", $userpass);
         $user = $userpass[0];
         $pass = $userpass[1];
-        if($user == "Nico" && $pass == "web"){
 
+        $dbUser = $this->userModel->getUserByEmail($user);
+
+        if ($dbUser && password_verify($pass, $dbUser->password)){
+            
             $header = array(
                 'alg' => 'HS256',
                 'typ' => 'JWT'
             );
             $payload = array(
                 'id' => 1,
-                'name' => "Nico",
+                'name' => $user,
                 'exp' => time()+3600
             );
             $header = base64url_encode(json_encode($header));

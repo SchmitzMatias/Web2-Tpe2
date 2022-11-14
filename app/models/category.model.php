@@ -5,7 +5,7 @@ class CategoryModel{
     private $db;
 
     private function connect() {
-        $db = new PDO('mysql:host=localhost;'.'dbname=lify;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=localhost;'.'dbname=lify_v2;charset=utf8', 'root', '');
         return $db;
     }
 

@@ -5,7 +5,7 @@ class UserModel {
     private $db;
 
     public function __construct() {
-        $this->db = new PDO('mysql:host=localhost;'.'dbname=lify;charset=utf8', 'root', '');
+        $this->db = new PDO('mysql:host=localhost;'.'dbname=lify_v2;charset=utf8', 'root', '');
     }
 
     public function getUserByEmail($email) {
