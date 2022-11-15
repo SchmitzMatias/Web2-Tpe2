@@ -90,8 +90,8 @@ class CategoryApiController {
     }
 
     public function getCategory($params = null){
-        if(isset($params['id'])){
-            $id = $params['id'];
+        if(isset($params[':id'])){
+            $id = $params[':id'];
             $category = $this->model->get($id);
             if($category){
                 $this->view->response($category);
@@ -155,12 +155,21 @@ class CategoryApiController {
 
         $category = $this->model->get($id);
         if($category){
-            $this->model->delete($id);
-            $this->view->response($category);
+            try{
+                $this->model->delete($id);
+                $this->view->response($category);
+            }
+            catch(PDOException){
+                $this->view->response("La categoria seleccionada tiene productos asociados y no puede ser borrada");
+            }
         }
         else{
             $this->view->response("La categoria con el id=$id no existe",404);
         }
+    }
+
+    public function default(){
+        $this->view->response("Pagina no encontrada, compruebe la url",404);
     }
 
 }

@@ -14,4 +14,6 @@ $router->addRoute('categories/:id', 'DELETE', 'CategoryApiController', 'deleteCa
 
 $router->addRoute("auth/token", 'GET', 'AuthApiController', 'getToken');
 
+$router->setDefaultRoute('CategoryApiController','default');
+
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
