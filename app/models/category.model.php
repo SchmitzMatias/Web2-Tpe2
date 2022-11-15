@@ -42,8 +42,8 @@ class CategoryModel{
         return $category;
     }
 
-    function getByFieldValue($filterBy, $value){
-        $query = 'SELECT * from categories WHERE ' . $filterBy . ' LIKE \'%' . $value . '%\'';
+    function getByFieldValue($sortBy, $order, $limit, $offset, $filterBy, $value){
+        $query = 'SELECT * from categories   WHERE ' . $filterBy . ' LIKE \'%' . $value . '%\' '. 'ORDER BY ' . $sortBy . ' ' . $order  . ' LIMIT ' . $offset .',' .$limit;
 
         $preparedQuery = $this->db->prepare($query);
         $preparedQuery->execute();

@@ -76,7 +76,7 @@ class CategoryApiController {
             $value = strtolower($_GET['value']);
 
             if (in_array($filterBy,$this->model->getFields())){
-                $categories = $this->model->getByFieldValue($filterBy, $value);
+                $categories = $this->model->getByFieldValue($sortBy, $order, $limit, $offset, $filterBy, $value);
                 $this->view->response($categories,200);
                 die();
             }else{
