@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2022 a las 03:21:55
+-- Tiempo de generación: 16-11-2022 a las 00:50:42
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `lify`
+-- Base de datos: `lify_v2`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,10 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `description`) VALUES
 (6, 'Microgreen', 'Son plántulas jóvenes, con los mismos sabores y nutrientes que sus versiones adultas pero en una mayor concentración.'),
 (7, 'Aromatica', 'Su nombre lo dice todo, más allá de ser un elemento decorativo son un gran aporte al aroma y sabor de tu plato.'),
-(8, 'Flor comestible', 'Si bien algunas tienen sabor, el fuerte indebatible es la estética que aportan a los platos o postres.');
+(8, 'Flor comestible', 'Si bien algunas tienen sabor, el fuerte indebatible es la estética que aportan a los platos o postres.'),
+(19, 'dummy category', 'descripción de relleno para la categoria dummy.'),
+(20, 'dummy category 2', 'dummy description 2'),
+(21, 'Nueva Categoria', 'Descripción de la categoria nueva con acento');
 
 -- --------------------------------------------------------
 
@@ -67,7 +70,8 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `id_category_fk`) 
 (14, 'Remolacha', 'Se caracterizan por su llamativo tallo rojo con hojas verdes.', 10.82, 6),
 (15, 'Rucula', 'Mismo sabor que su contraparte adulta, pero potenciada.', 8.08, 6),
 (16, 'Tomillo limon', 'Similar al tomillo clásico, pero con agradable aroma cítrico', 50, 7),
-(17, 'Hibiscus', 'Popular en oriente, esta flor se caracteriza por su agradable textura y sabor.', 200, 8);
+(17, 'Hibiscus', 'Popular en oriente, esta flor se caracteriza por su agradable textura y sabor.', 200, 8),
+(25, 'test', 'test-description', 5, 19);
 
 -- --------------------------------------------------------
 
@@ -86,7 +90,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`) VALUES
-(1, 'admin@admin.com', '$2a$12$ae0i4v449xY.cv21V5FNdeZ8EBRphFcNjqtLW8WzzdfSgrAGceov6');
+(1, 'admin@admin.com', '$2a$12$ae0i4v449xY.cv21V5FNdeZ8EBRphFcNjqtLW8WzzdfSgrAGceov6'),
+(2, 'Nico@web.com', '$2a$12$PH4BZr4PfwCGpwgJ0SlRb.IyVMWsLvB4mv6n.xOV4BQb3uxGtonWq');
 
 --
 -- Índices para tablas volcadas
@@ -119,19 +124,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
