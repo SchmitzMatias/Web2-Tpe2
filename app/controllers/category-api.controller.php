@@ -96,7 +96,7 @@ class CategoryApiController {
             if($category){
                 $this->view->response($category);
             }else{
-                $this->view->response("La categoria con el id=$id no existe");
+                $this->view->response("La categoria con el id=$id no existe",404);
             }
         }
     }
