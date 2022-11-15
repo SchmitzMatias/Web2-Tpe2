@@ -160,7 +160,7 @@ class CategoryApiController {
                 $this->view->response($category);
             }
             catch(PDOException){
-                $this->view->response("La categoria seleccionada tiene productos asociados y no puede ser borrada");
+                $this->view->response("La categoria seleccionada tiene productos asociados y no puede ser borrada",409);
             }
         }
         else{
