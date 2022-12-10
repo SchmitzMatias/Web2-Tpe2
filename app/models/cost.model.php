@@ -1,6 +1,6 @@
 <?php
 
-class CostsModel{
+class CostModel{
 
     private $db;
 

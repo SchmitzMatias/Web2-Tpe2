@@ -62,14 +62,14 @@ class ProductApiController {
             $this->view->response($product);
         }
         else{
-            $this->view->response("La categoria con el id=$id no existe",404);
+            $this->view->response("El producto con el id=$id no existe",404);
         }
     }
 
     public function deleteProduct($params = null){
         $id = $params[':id'];
 
-        $product = $this->model->get($id);
+        $product = $this->model->get($id); //TODO mejorar esto con try, ahorrando el llamado get
         if($product){
             $this->model->delete($id);
             $this->view->response($product);
